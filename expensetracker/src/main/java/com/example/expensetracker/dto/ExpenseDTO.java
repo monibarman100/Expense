@@ -1,4 +1,4 @@
-package com.example.expensetracker.entity.dto;
+package com.example.expensetracker.dto;
 
 import java.math.BigDecimal;
 
