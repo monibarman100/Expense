@@ -10,4 +10,6 @@ public interface ExpenseService {
 
 	List<Expense> getAllExpenses();
 
+	Expense saveExpense(Expense expense);
+
 }

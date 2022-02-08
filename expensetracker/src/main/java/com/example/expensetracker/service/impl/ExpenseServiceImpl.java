@@ -13,8 +13,12 @@ import com.example.expensetracker.service.ExpenseService;
 @Service
 public class ExpenseServiceImpl implements ExpenseService {
 	
-	@Autowired 
 	private ExpenseRepository expenseRepository;
+
+	public ExpenseServiceImpl(ExpenseRepository expenseRepository) {
+		super();
+		this.expenseRepository = expenseRepository;
+	}
 
 	@Override
 	public ExpenseDTO saveExpense(ExpenseDTO expense) {
@@ -32,6 +36,11 @@ public class ExpenseServiceImpl implements ExpenseService {
 		List<Expense> expenseGet = expenseRepository.findById();
 		return expenseGet;
 		
+	}
+
+	@Override
+	public Expense saveExpense(Expense expense) {
+		return expenseRepository.save(expense);
 	}
 
 	
