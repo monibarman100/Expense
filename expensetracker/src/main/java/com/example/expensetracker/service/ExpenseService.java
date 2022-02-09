@@ -12,4 +12,8 @@ public interface ExpenseService {
 
 	Expense saveExpense(Expense expense);
 
+	Expense updateExpense(Expense expense, long id);
+	
+	void deleteExpense(long id);
+
 }

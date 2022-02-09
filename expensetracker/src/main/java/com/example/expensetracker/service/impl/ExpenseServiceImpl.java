@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.expensetracker.dto.ExpenseDTO;
 import com.example.expensetracker.entity.Expense;
+import com.example.expensetracker.exception.ResourceNotFoundException;
 import com.example.expensetracker.repository.ExpenseRepository;
 import com.example.expensetracker.service.ExpenseService;
 
@@ -35,12 +36,29 @@ public class ExpenseServiceImpl implements ExpenseService {
 	public List<Expense> getAllExpenses() {
 		List<Expense> expenseGet = expenseRepository.findById();
 		return expenseGet;
-		
 	}
 
 	@Override
 	public Expense saveExpense(Expense expense) {
 		return expenseRepository.save(expense);
+	}
+
+	@Override
+	public Expense updateExpense(Expense expense, long id) {
+		Expense existingExpense =expenseRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Expense", "Id", id));
+		existingExpense.setName(expense.getName());
+		existingExpense.setCategory(expense.getCategory());
+		existingExpense.setType(expense.getType());
+		existingExpense.setAmount(expense.getAmount());
+		expenseRepository.save(existingExpense);
+		return null;
+	}
+
+	@Override
+	public void deleteExpense(long id) {
+		expenseRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Expense", "Id", id));
+		expenseRepository.deleteById(id);
+		
 	}
 
 	
