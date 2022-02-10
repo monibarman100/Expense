@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.expensetracker.dto.ExpenseDTO;
 import com.example.expensetracker.entity.Expense;
 import com.example.expensetracker.repository.ExpenseRepository;
 import com.example.expensetracker.service.ExpenseService;
@@ -28,13 +29,18 @@ public class ExpenseController {
 	private ExpenseService expenseService;
 	
 	@GetMapping
-	public List<Expense> getAllExpenses(){
+	public List<ExpenseDTO> getAllExpenses(){
 		return expenseService.getAllExpenses();
 	}
 	
+	@GetMapping("{id}")
+	public Expense getExpenceById(@PathVariable Long id) {
+		return expenseService.getExpenceById(id);
+	}
+	
 	@PostMapping
-	public ResponseEntity<Expense> saveExpense(@RequestBody Expense expense){
-		return new ResponseEntity<Expense>(expenseService.saveExpense(expense), HttpStatus.CREATED);
+	public ResponseEntity<ExpenseDTO> saveExpense(@RequestBody ExpenseDTO expenseDTO){
+		return new ResponseEntity<ExpenseDTO>(expenseService.saveExpense(expenseDTO), HttpStatus.CREATED);
 		
 	}
 	
