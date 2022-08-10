@@ -2,18 +2,19 @@ package com.example.expensetracker.repository;
 
 import java.util.List;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-
-import com.example.expensetracker.dto.ExpenseDTO;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import com.example.expensetracker.entity.Expense;
 import com.example.expensetracker.entity.User;
 
+public interface ExpenseRepository extends PagingAndSortingRepository<Expense, Long> {
 
-public interface ExpenseRepository extends JpaRepository <Expense, Long> {
-
-	@Query("FROM Expense as e WHERE e.id IS NOT NULL")
-	List<ExpenseDTO> findById();
+	//SELECT *FROM tbl_expense WHERE type=?
+	
+	Page<Expense>findByType(String type,Pageable page);
+	
+	Page<Expense>findByCategory(String category,Pageable page);
 
 
 }

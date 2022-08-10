@@ -1,13 +1,11 @@
 package com.example.expensetracker.repository;
 
-import java.util.List;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import com.example.expensetracker.entity.User;
 
-public interface UserRepository extends JpaRepository <User, Long> {
+public interface UserRepository extends PagingAndSortingRepository<User, Long> {
 
-	@Query("FROM User as u WHERE u.id IS NOT NULL")
-	List<User> getAllUsersByID();
+	User getUserByEmailIdAndMobileNo(String email,String mobileNo);
+
 
 }

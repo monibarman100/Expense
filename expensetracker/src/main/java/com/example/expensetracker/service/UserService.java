@@ -1,15 +1,25 @@
 package com.example.expensetracker.service;
 
-import java.util.List;
-
-import com.example.expensetracker.dto.ExpenseDTO;
-import com.example.expensetracker.entity.Expense;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import com.example.expensetracker.entity.User;
 
 public interface UserService {
-	
 
-	List<User> getAllUsers();
+	Page<User> getAllUsers(Pageable page);
+
+	User saveUsers(User user);
+
+	User updateUser(User user, Long id);
+
+	User getUserByID(Long id);
+
+	void deleteUser(Long id);
+
+	User getUserByLogin(String email,String mobileNo);
+
+	
+	
 
 	
 
